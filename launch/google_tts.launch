@@ -1,0 +1,6 @@
+<launch>
+    <arg name="google_auth_path" default="/home/kaleb/code/ros_ws/src/ros_speech2text/ros-speech2text-google-stt-cred.json"/>
+    <node name="google_tts" pkg="google_tts" type="google_tts_server.py" output="screen">
+        <param name="google_auth_path" value="$(arg google_auth_path)"/>
+    </node>
+</launch>

@@ -1,0 +1,5 @@
+google-api-core==2.7.1
+google-auth==1.35.0
+google-cloud-texttospeech==2.11.1
+google-gax==0.16.0
+googleapis-common-protos==1.56.0

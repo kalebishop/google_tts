@@ -13,7 +13,7 @@ class GoogleTTS:
         os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = rospy.get_param("google_tts/google_auth_path")
 
         self.language = 'en-US'
-        self.voice = 'en-US-Standard-C'
+        self.voice = 'en-US-Standard-H'
 
         self.voice_params = tts.VoiceSelectionParams(
             language_code=self.language,
@@ -30,7 +30,7 @@ class GoogleTTS:
     def handle_request(self, request):
         res = SpeechResponse()
 
-        text = "<speak><prosody pitch=\"+2st\">{}</prosody></speak>".format(request.text)
+        text = "<speak>{}</speak>".format(request.text)
         text_input = tts.SynthesisInput(ssml=text)
         response = self.client.synthesize_speech(input=text_input, voice=self.voice_params, audio_config=self.audio_config)
         res.filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tts.mp3")
@@ -41,7 +41,7 @@ class GoogleTTS:
         res.filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tts.mp3")
 
         mp3_obj = MP3(res.filename)
-        print(mp3_obj.info.length)
+        # print(mp3_obj.info.length)
         res.duration = mp3_obj.info.length
         return res
 if __name__ == "__main__":
